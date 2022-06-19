@@ -1,0 +1,17 @@
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+User=${NODE_EXPORTER_USER}
+Group=${NODE_EXPORTER_USER}
+Type=simple
+Restart=on-failure
+RestartSec=5s
+ExecStart=${BIN_DIRECTORY}/node_exporter --web.config=/etc/node-exporter/config.yml
+
+[Install]
+WantedBy=multi-user.target
