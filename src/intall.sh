@@ -33,7 +33,8 @@ cp ${SCRIPT_PATH}/config.yml ${CONF_DIRECTORY}/
 cp ${SCRIPT_PATH}/node_exporter.service /etc/systemd/system/
 
 # change values of config file and systemd service
-
+echo "Generating password for basic auth"
+PASSWD=$(htpasswd -nbBC 17 "" ${RAND_PW} | tr -d ':\n')
 
 chown -R ${NODE_EXPORTER_USER}:${NODE_EXPORTER_USER} ${CONF_DIRECTORY}
 
