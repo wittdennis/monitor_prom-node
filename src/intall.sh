@@ -11,19 +11,21 @@ SCRIPT_PATH=$(dirname "$SCRIPT")
 NODE_EXPORTER_VERSION="1.3.1"
 NODE_EXPORTER_USER="node_exporter"
 BIN_DIRECTORY="/usr/local/bin"
+BIN="node_exporter"
 CONF_DIRECTORY="/etc/node-exporter"
 ARCH="linux-amd64"
 RAND_PW=$(< /dev/urandom tr -dc A-Za-z0-9 | head -c32;)
 
 echo "Creating user '${NODE_EXPORTER_USER}' if not present"
-id -u ${NODE_EXPORTER_USER} 2>&1 /dev/null || useradd --system --shell /usr/bin/bash --user-group --disabled-password --home /home/${NODE_EXPORTER_USER} ${NODE_EXPORTER_USER} 
+id -u ${NODE_EXPORTER_USER} > /dev/null 2>&1 || useradd -r -s /usr/bin/bash -U -m ${NODE_EXPORTER_USER} 
 
-# install bin
+install bin
 echo "Downloading Node Exporter v${NODE_EXPORTER_VERSION}"
 wget https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.${ARCH}.tar.gz
+echo "Copying '${BIN}' to '${BIN_DIRECTORY}'"
 tar -xf node_exporter-${NODE_EXPORTER_VERSION}.${ARCH}.tar.gz
-cp node_exporter-${NODE_EXPORTER_VERSION}.${ARCH}/node_exporter ${BIN_DIRECTORY}/
-chown ${NODE_EXPORTER_USER}:${NODE_EXPORTER_USER} ${BIN_DIRECTORY}/node_exporter
+cp node_exporter-${NODE_EXPORTER_VERSION}.${ARCH}/node_exporter ${BIN_DIRECTORY}/${BIN}
+chown ${NODE_EXPORTER_USER}:${NODE_EXPORTER_USER} ${BIN_DIRECTORY}/${BIN}
 rm -rf node_exporter-${NODE_EXPORTER_VERSION}.${ARCH}*
 
 # config
