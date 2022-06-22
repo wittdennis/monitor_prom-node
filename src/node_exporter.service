@@ -11,7 +11,7 @@ Group=${NODE_EXPORTER_USER}
 Type=simple
 Restart=on-failure
 RestartSec=5s
-ExecStart=${BIN_DIRECTORY}/node_exporter --web.config=/etc/node-exporter/config.yml
+ExecStart=${BIN_DIRECTORY}/${BIN} --web.listen-address=:${PORT} --web.config=${CONF_DIRECTORY}/config.yml
 
 [Install]
 WantedBy=multi-user.target
