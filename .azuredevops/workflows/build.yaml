@@ -1,0 +1,8 @@
+pool:   
+  vmImage: ubuntu-latest
+
+steps:
+  - task: PublishBuildArtifacts@1
+    inputs:
+      ArtifactName: drop
+      PathtoPublish: src/

@@ -46,7 +46,7 @@ chown ${NODE_EXPORTER_USER}:${NODE_EXPORTER_USER} ${BIN_DIRECTORY}/${BIN}
 rm -rf node_exporter-${NODE_EXPORTER_VERSION}.${ARCH}*
 
 # config
-mkdir ${CONF_DIRECTORY}
+mkdir -p ${CONF_DIRECTORY}
 
 if [ -z "${GENERATE_CERT}" ] || [ "${GENERATE_CERT}" != "false" ]
 then
