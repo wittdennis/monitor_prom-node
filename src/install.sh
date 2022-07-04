@@ -29,7 +29,7 @@ NODE_EXPORTER_VERSION="1.3.1"
 NODE_EXPORTER_USER="node_exporter"
 BIN_DIRECTORY="/usr/local/bin"
 BIN="node_exporter"
-CONF_DIRECTORY="/etc/node-exporter"
+CONF_DIRECTORY="/etc/node_exporter"
 ARCH="linux-amd64"
 PORT="9100"
 
@@ -52,7 +52,7 @@ if [ -z "${GENERATE_CERT}" ] || [ "${GENERATE_CERT}" != "false" ]
 then
   echo "Generating self-signed certificate"
   # self-signed localhost cert
-  openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout node_exporter.key -out node_exporter.crt -subj "/CN=localhost" -addext "subjectAltName = DNS:localhost"
+  openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout node_exporter.key -out node_exporter.crt -subj "/CN=localhost" -addext "subjectAltName = DNS:localhost,DNS:host.docker.internal"
   mv node_exporter.* ${CONF_DIRECTORY}/
 fi
 

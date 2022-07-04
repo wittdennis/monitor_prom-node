@@ -11,7 +11,7 @@ NODE_EXPORTER_VERSION="1.3.1"
 NODE_EXPORTER_USER="node_exporter"
 BIN_DIRECTORY="/usr/local/bin"
 BIN="node_exporter"
-CONF_DIRECTORY="/etc/node-exporter"
+CONF_DIRECTORY="/etc/node_exporter"
 ARCH="linux-amd64"
 
 echo "Removing service"
